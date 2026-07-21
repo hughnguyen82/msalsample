@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 
+import { MsalProvider } from "@azure/msal-react";
 import App from "./App";
 
 // MSAL imports
@@ -26,10 +27,9 @@ msalInstance.initialize().then(() => {
         }
     });
 
-    const root = ReactDOM.createRoot(
-        document.getElementById("root") as HTMLElement
-    );
-    root.render(
-        <App pca={msalInstance} />
+    ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+        <MsalProvider instance={msalInstance}>
+            <App />
+        </MsalProvider>
     );
 });

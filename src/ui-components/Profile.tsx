@@ -6,12 +6,29 @@ import { InteractionStatus, InteractionType, InteractionRequiredAuthError, type 
 import { loginRequest } from "../utils/msalConfig.ts";
 
 // Sample app imports
-import { ProfileData, type GraphData } from "./ProfileData.tsx";
-import { Loading } from "./Loading.tsx";
-import { ErrorComponent } from "./ErrorComponent.tsx";
 import { callMsGraph } from "../utils/MsGraphApiCall.ts";
 
+import type {MsalAuthenticationResult} from "@azure/msal-react";
 
+type GraphData = {
+    displayName: string,
+    jobTitle: string,
+    mail: string,
+    businessPhones: string[],
+    officeLocation: string
+};
+
+const ProfileData: React.FC<{graphData: GraphData}> = ({graphData}) => {
+    return (
+        <div>
+            <div>name={graphData.displayName}</div>
+            <div>jobTitle={graphData.jobTitle}</div>
+            <div>mail={graphData.mail}</div>
+            <div>phone={graphData.businessPhones[0]}</div>
+            <div>location={graphData.officeLocation}</div>
+        </div>
+    );
+};
 
 const ProfileContent = () => {
     const { instance, inProgress } = useMsal();
@@ -36,6 +53,14 @@ const ProfileContent = () => {
         </div>
     );
 };
+
+const ErrorComponent: React.FC<MsalAuthenticationResult> = ({error}) => {
+    return <div>An Error Occurred: {error ? error.errorCode : "unknown error"}</div>;
+}
+
+const Loading = () => {
+    return <div>Authentication in progress...</div>
+}
 
 const Profile = () => {
     const authRequest = {
