@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // Msal imports
 import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react";
 import { InteractionStatus, InteractionType, InteractionRequiredAuthError, type AccountInfo } from "@azure/msal-browser";
-import { loginRequest } from "../authConfig.tsx";
+import { loginRequest } from "../utils/msalConfig.ts";
 
 // Sample app imports
 import { ProfileData, type GraphData } from "./ProfileData.tsx";

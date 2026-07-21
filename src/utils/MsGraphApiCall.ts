@@ -1,4 +1,4 @@
-import { loginRequest, graphConfig, msalInstance } from "../authConfig";
+import { loginRequest, graphConfig, msalInstance } from "./msalConfig.ts";
 
 export async function callMsGraph() {
     const account = msalInstance.getActiveAccount();

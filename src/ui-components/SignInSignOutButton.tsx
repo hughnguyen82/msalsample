@@ -2,7 +2,7 @@ import { useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { SignInButton } from "./SignInButton";
 import { SignOutButton } from "./SignOutButton";
 import { InteractionStatus } from "@azure/msal-browser";
-import {loginRequest} from "../authConfig.tsx";
+import {loginRequest} from "../utils/msalConfig.ts";
 import React from "react";
 
 const SignInSignOutButton = () => {

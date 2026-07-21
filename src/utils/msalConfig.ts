@@ -5,8 +5,8 @@ export const msalConfig = {
     auth: {
         clientId: "e577bf35-7234-4a7f-aaec-08f0d0d213c4", //0845a021-afdf-4126-abdd-099c5e6948e1
         authority: "https://login.microsoftonline.com/common",
-        redirectUri: "/redirect",
-        postLogoutRedirectUri: "/redirect",
+        redirectUri: "/redirect.html",
+        postLogoutRedirectUri: "/redirect.html",
         onRedirectNavigate: () => !BrowserUtils.isInIframe()
     },
     cache: {

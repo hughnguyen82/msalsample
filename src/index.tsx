@@ -10,7 +10,7 @@ import App from "./App";
 import {EventType, type EventMessage, type AccountInfo} from "@azure/msal-browser";
 
 
-import {msalInstance} from "./authConfig";
+import {msalInstance} from "./utils/msalConfig.ts";
 
 msalInstance.initialize().then(() => {
     // Account selection logic is app dependent. Adjust as needed for different use cases.
