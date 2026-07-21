@@ -29,7 +29,7 @@ msalInstance.initialize().then(() => {
 
     ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <MsalProvider instance={msalInstance}>
-            <App />
+            <App autoSignIn={false} />
         </MsalProvider>
     );
 });
