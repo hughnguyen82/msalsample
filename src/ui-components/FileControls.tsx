@@ -1,23 +1,24 @@
-import { useState, useEffect, useRef } from "react";
-
+// react imports
+import { useState, useEffect, } from "react";
 
 // MSAL imports
 import { useIsAuthenticated } from "@azure/msal-react";
 
-
+// project imports
 import { listDriveItems, loadFile, saveFile } from "../utils/MsGraphApiCall.ts";
 
+// end of imports
+//////////////////////////////////////////////////////////////////////////////////////////
 
 type DriveItem = {
     id: string;
     name: string;
 };
 
-const Editor = ()=> {
+const FileControls = ()=> {
     const isAuthenticated = useIsAuthenticated();
     const [files, setFiles] = useState<DriveItem[]>([]);
     const [selectedFileId, setSelectedFileId] = useState<string>("");
-    const editorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -29,8 +30,9 @@ const Editor = ()=> {
         if (!selectedFileId) return;
         try {
             const content = await loadFile(selectedFileId);
-            if (editorRef.current) {
-                editorRef.current.innerText = content;
+            const editor = document.getElementById('text-editor');
+            if (editor) {
+                editor.innerText = content;
             }
         } catch (e) {
             console.error(e);
@@ -38,9 +40,12 @@ const Editor = ()=> {
     };
 
     const handleSave = async () => {
-        if (!selectedFileId || !editorRef.current) return;
+        const editor = document.getElementById('text-editor');
+        const content = editor ? editor.innerText : "";
+
+        if (!selectedFileId) return;
         try {
-            await saveFile(selectedFileId, editorRef.current.innerText);
+            await saveFile(selectedFileId, content);
             alert("File saved!");
         } catch (e) {
             console.error(e);
@@ -60,9 +65,8 @@ const Editor = ()=> {
                   <button id="load" onClick={handleLoad}>Load from OneDrive</button>
                   <button id="save" onClick={handleSave}>Save to OneDrive</button>
               </div>
-              <div id="test-editor" contentEditable="true" ref={editorRef}></div>
           </div>
     )
 }
 
-export default Editor
+export default FileControls
